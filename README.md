@@ -1,37 +1,42 @@
-## Welcome to GitHub Pages
+## Custom jQuery Select
 
-You can use the [editor on GitHub](https://github.com/williankeller/jquery-custom-select/edit/master/README.md) to maintain and preview the content for your website in Markdown files.
+This plug-in allow you customize your form select select options easily and with a small library.
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+You can define some setting to start or just use the default options, follow:
 
-### Markdown
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
-
-```markdown
-Syntax highlighted code block
-
-# Header 1
-## Header 2
-### Header 3
-
-- Bulleted
-- List
-
-1. Numbered
-2. List
-
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
+#### Example One:
+Simple and standard use, just define the current select class.
+This use will transform all the selects that contains the `select-one` class into a custom select.
+```javascript
+$('.select-one').customSelect();
 ```
 
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
+#### Example Two:
+Adding a custom title to your select *(default - )*:
+This setup will add a custom title inside your custom select.
+```javascript
+$('.select-two').customSelect({
+  defaultText: 'Select your option here'
+});
+```
 
-### Jekyll Themes
+#### Example three:
+Changing click element *(default p)*.
+This setup will replace the tag click element, example, if you need the click became a div or a heading.
+```javascript
+$('.select-three').customSelect({
+  defaultElement: 'h5',
+});
+```
 
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/williankeller/jquery-custom-select/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
+#### Example Four:
+Submit form when select an option *(default false)*.
+If exist an element with the submit type, it will be hidden automatically and the form will be submitted automatically when option is changed.
+```javascript
+$('.select-four').customSelect({
+  autoFormSubmit: true,
+});
+```
 
-### Support or Contact
-
-Having trouble with Pages? Check out our [documentation](https://help.github.com/categories/github-pages-basics/) or [contact support](https://github.com/contact) and we’ll help you sort it out.
+See this page for live example: https://williankeller.github.io/jquery-custom-select/
