@@ -1,52 +1,52 @@
 <!DOCTYPE html>
-<html lang="en-us">
-    <head>
-        <meta charset="UTF-8">
-        <title>Checkbox Switch por Willian Keller</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" type="text/css" href="stylesheets/normalize.css" media="screen">
-        <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
-        <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
-        <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
-        <link rel="stylesheet" type="text/css" href="stylesheets/estilos.css" media="screen">
-    </head>
-    <body>
-        <section class="page-header">
-            <h1 class="project-name">Checkbox Switch</h1>
-            <h2 class="project-tagline">Checkbox Usando Switch</h2>
-            <a href="https://github.com/williankeller/checkbox-switch" class="btn">View on GitHub</a>
-            <a href="https://github.com/williankeller/checkbox-switch/zipball/master" class="btn">Download .zip</a>
-            <a href="https://github.com/williankeller/checkbox-switch/tarball/master" class="btn">Download .tar.gz</a>
-        </section>
+<html>
+  <head>
+    <title>Custom jQuery Select - Willian Keller</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="./dist/css/custom-select.css">
+    <!-- Used just to create example file. (Not necessary at all) -->
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  </head>
+  <body>
+    <div class="container custom-example">
+      <form class="margin">
+        <h4>Example One:</h4>
+        <p>Simple use, just define the current select class:</p>
+        <pre><code>$('.select-one').customSelect();</code></pre>
+        <select class="select-one">
+          <option value="select1-value1">Select one - Value 1</option>
+          <option value="select1-value2">Select one - Value 2</option>
+          <option value="select1-value3">Select one - Value 3</option>
+        </select>
+      </form>
 
-        <section class="main-content">
-            <h3>
-                <a id="welcome-to-github-pages" class="anchor" href="#welcome-to-github-pages" aria-hidden="true"><span class="octicon octicon-link"></span></a>Checkbox com Switch usando apenas CSS</h3>
+      <form class="margin">
+        <h4>Example Two:</h4>
+        <p>Adding a custom title to your select:</p>
+<pre><code>$('.select-two').customSelect({
+  defaultText: 'Select your option here'
+});</code></pre>
+        <select class="select-two">
+          <option value="select2-value1">Select two - Value 1</option>
+          <option value="select2-value2">Select two - Value 2</option>
+          <option value="select2-value3">Select two - Value 3</option>
+        </select>
+      </form>
+    </div>
 
-            <p>Para tornar as inputs checkbox mais estilizadas, foi criado estilos que tornam um checkbox em um switch.</p>
+    <!-- Necessary jQuery instance file -->
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js" crossorigin="anonymous"></script>
 
-            <div class="container">
-                <label class="switch switch-primary">
-                    <input type="checkbox" checked="">
-                    <span class="switch"></span> 
-                </label>
-                <label class="switch switch-success">
-                    <input type="checkbox" checked="">
-                    <span class="switch"></span> 
-                </label>
-                <label class="switch switch-warning">
-                    <input type="checkbox" checked="">
-                    <span class="switch"></span> 
-                </label>
-                <label class="switch switch-danger">
-                    <input type="checkbox" checked="">
-                    <span class="switch"></span> 
-                </label>
-            </div>
-            <footer class="site-footer">
-                <span class="site-footer-owner"><a href="https://github.com/williankeller/Checkbox-Switch">Checkbox Switch</a> é mantido por <a href="https://github.com/williankeller">williankeller</a>.</span>
+    <!-- Custom select script file -->
+    <script src="./dist/js/custom-select.min.js"></script>
+    <script>
+      $('.select-one').customSelect();
 
-            </footer>
-        </section>
-    </body>
+      $('.select-two').customSelect({
+        defaultText: 'Select your option here'
+      });
+    </script>
+  </body>
 </html>
