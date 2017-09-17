@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Custom jQuery Select</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="./dist/css/custom-select.css">
+    <!-- Used just to create example file. (Not necessary at all) -->
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  </head>
+  <body>
+    <div class="container custom-example">
+      <form class="margin">
+        <h4>Example One:</h4>
+        <p>Simple use, just define the current select class:</p>
+        <pre><code>$('.select-one').customSelect();</code></pre>
+        <select class="select-one">
+          <option value="select1-value1">Select one - Value 1</option>
+          <option value="select1-value2">Select one - Value 2</option>
+          <option value="select1-value3">Select one - Value 3</option>
+        </select>
+      </form>
+
+      <form class="margin">
+        <h4>Example Two:</h4>
+        <p>Adding a custom title to your select:</p>
+<pre><code>$('.select-two').customSelect({
+  defaultText: 'Select your option here'
+});</code></pre>
+        <select class="select-two">
+          <option value="select2-value1">Select two - Value 1</option>
+          <option value="select2-value2">Select two - Value 2</option>
+          <option value="select2-value3">Select two - Value 3</option>
+        </select>
+      </form>
+    </div>
+
+    <!-- Necessary jQuery instance file -->
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js" crossorigin="anonymous"></script>
+
+    <!-- Custom select script file -->
+    <script src="./dist/js/custom-select.min.js"></script>
+    <script>
+      $('.select-one').customSelect();
+
+      $('.select-two').customSelect({
+        defaultText: 'Select your option here'
+      });
+    </script>
+  </body>
+</html>

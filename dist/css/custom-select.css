@@ -1,0 +1,36 @@
+.custom-example .margin {
+  margin: 50px 0;
+}
+
+.custom-select-container > * {
+  font-family: sans-serif;
+  font-size: 15px;
+}
+.custom-select-container .custom-select-current {
+  border: 3px solid #ddd;
+  border-radius: 3px;
+  cursor: pointer;
+  margin: 0;
+  padding: 15px;
+}
+.custom-select-container .custom-select-options {
+  border: 3px solid #ddd;
+  border-top: 0;
+  display: none;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.custom-select-container .custom-select-options li {
+  background-color: #f9f9f9;
+  color: #777;
+  margin-bottom: 2px;
+  padding: 15px;
+}
+.custom-select-container .custom-select-options li:last-child {
+  margin-bottom: 0;
+}
+.custom-select-container .custom-select-options li:hover {
+  background-color: #eee;
+  cursor: pointer;
+}

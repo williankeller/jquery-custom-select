@@ -2,10 +2,10 @@
 
   /**
    * Define global function to set a custom select.
-   * 
+   *
    * Basic usage:
    * $('select').customSelect();
-   * 
+   *
    * @param {Object} options
    * @return {jQuery}
    */
@@ -41,33 +41,36 @@
      */
     var buildCustomSelect = function (element) {
       var $select = $(element);
+      // Hide select options.
+      $select.hide();
 
       // Build the custom select container.
       $('<div/>', {
         'class': settings.classContainer.replace('.', '')
       }).insertAfter($select);
 
-      // Hide select options.
-      $select.hide();
 
-      // Build the custom option to display selected value.
+      var $container = $(element).next(settings.classContainer);
+      // Build custom option to display selected value.
       $(settings.defaultElement, {
         'class': settings.classCurrent.replace('.', ''),
         'text': settings.defaultText
-      }).appendTo(settings.classContainer);
+      }).appendTo($container);
 
-      // Build area to append the list of values. 
+
+      // Build area to append the list of values.
       $('<ul/>', {
         'class': settings.classOptions.replace('.', ''),
         'role': 'menu'
-      }).appendTo(settings.classContainer);
+      }).appendTo($container);
 
+      var $options = $container.find(settings.classOptions);
       // Build the list of settings and append at the created ul block.
       $select.find('option').each(function () {
         $('<li/>', {
           'data-option': $(this).val(),
           'text': $(this).text()
-        }).appendTo(settings.classOptions);
+        }).appendTo($options);
       });
 
       // Hide button if auto submit is true.
@@ -84,12 +87,18 @@
      *
      * @returns {Boolean}
      */
-    var clickSelectValues = function () {
+    var clickSelectValues = function (element) {
+      var $element = $(element),
+        $container = $element.next(settings.classContainer),
+        $select = $container.find(settings.classCurrent);
+
       // Detect custom select action.
-      $(settings.classCurrent).on('click', function () {
+      $select.on('click', function () {
+        var $this = $(this);
+
         // If is already open, action to close.
-        if ($(settings.classOptions).hasClass('opened')) {
-          $(this)
+        if ($this.hasClass('expanded')) {
+          $this
             .removeClass('expanded')
             .next()
             .removeClass('opened')
@@ -97,7 +106,7 @@
         }
         // Otherwise, add parameters to display options.
         else {
-          $(this)
+          $this
             .addClass('expanded')
             .next()
             .addClass('opened')
@@ -114,17 +123,21 @@
      * @returns {Boolean}
      */
     var clickSelectOption = function (element) {
+      var $element = $(element),
+        $container = $element.next(settings.classContainer),
+        $options = $container.find(settings.classOptions);
+
       // Detect click action.
-      $(settings.classOptions).find('li').on('click', function () {
+      $options.find('li').on('click', function () {
         var $this = $(this);
 
         // Select current option under the old select box.
-        $(element).find('option').filter(function () {
+        $element.find('option').filter(function () {
           return ($(this).val().toString()) === ($this.data('option').toString());
         }).prop('selected', true);
 
         // Hide select options.
-        $(this)
+        $this
           .parent()
           .removeClass('opened')
           .slideUp()
@@ -134,14 +147,14 @@
         // Check if form should be submited when change select.
         if (settings.autoFormSubmit === false) {
           // If false, just set current selection.
-          $(this)
+          $this
             .parent()
             .prev()
             .text($this.text());
         }
         // If true, submit select form.
         else {
-          $(element)
+          $element
             .closest('form')
             .submit();
         }
@@ -160,7 +173,7 @@
       // Build the custom select elements.
       buildCustomSelect(this);
       // Define click action to custom created element.
-      clickSelectValues();
+      clickSelectValues(this);
       // Define click action to custom created list of elements.
       clickSelectOption(this);
     });
