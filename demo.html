@@ -4,7 +4,9 @@
     <title>Custom jQuery Select</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Willian Keller, will_levinski@hotmail.com">
     <link rel="stylesheet" type="text/css" href="./dist/css/custom-select.css">
+
     <!-- Used just to create example file. (Not necessary at all) -->
     <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   </head>
@@ -23,8 +25,8 @@
 
       <form class="margin">
         <h4>Example Two:</h4>
-        <p>Adding a custom title to your select:</p>
-<pre><code>$('.select-two').customSelect({
+        <p>Adding a custom title to your select <em class="text-muted">(default - )</em>:</p>
+        <pre><code>$('.select-two').customSelect({
   defaultText: 'Select your option here'
 });</code></pre>
         <select class="select-two">
@@ -33,6 +35,48 @@
           <option value="select2-value3">Select two - Value 3</option>
         </select>
       </form>
+
+      <form class="margin">
+        <h4>Example Three:</h4>
+        <p>Changing click element <em class="text-muted">(default p)</em>:</p>
+        <pre><code>$('.select-three').customSelect({
+  defaultElement: 'h5',
+  defaultText: 'Here is a H5 element select'
+});</code></pre>
+        <select class="select-three">
+          <option value="select3-value1">Select three - Value 1</option>
+          <option value="select3-value2">Select three - Value 2</option>
+          <option value="select3-value3">Select three - Value 3</option>
+        </select>
+      </form>
+
+      <form class="margin" method="GET">
+        <h4>Example Four:</h4>
+        <p>Submit form when select an option <em class="text-muted">(default false)</em>:
+          <br>An element as submit type exist, it will be hidden.</p>
+        <pre><code>$('.select-four').customSelect({
+  autoFormSubmit: true,
+  defaultElement: 'div',
+  defaultText: 'Select an option to submit form'
+});</code></pre>
+        <select class="select-four" name="select4">
+          <option value="select4-value1">Select four - Value 1</option>
+          <option value="select4-value2">Select four - Value 2</option>
+          <option value="select4-value3">Select four - Value 3</option>
+        </select>
+        <button type="submit">Submit</button>
+      </form>
+    </div>
+
+    <div class="container custom-example">
+      <div class="margin clearfix">
+        <div class="pull-left">
+          <a href="https://github.com/williankeller/jquery-custom-select">See code</a>
+        </div>
+        <div class="pull-right">
+          <a href="https://github.com/williankeller/jquery-custom-select#fork-destination-box">Fork</a>
+        </div>
+      </div>
     </div>
 
     <!-- Necessary jQuery instance file -->
@@ -41,10 +85,25 @@
     <!-- Custom select script file -->
     <script src="./dist/js/custom-select.min.js"></script>
     <script>
+      // Default usage.
       $('.select-one').customSelect();
 
+      // Adding a custom title to your select.
       $('.select-two').customSelect({
         defaultText: 'Select your option here'
+      });
+
+      // Changing element click.
+      $('.select-three').customSelect({
+        defaultElement: 'h5',
+        defaultText: 'Here is a H5 element select'
+      });
+
+      // Submit form when select an option.
+      $('.select-four').customSelect({
+        autoFormSubmit: true,
+        defaultElement: 'div',
+        defaultText: 'Select an option to submit form'
       });
     </script>
   </body>
