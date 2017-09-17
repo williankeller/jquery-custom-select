@@ -20,7 +20,7 @@
       // Submit form when select option is selected.
       autoFormSubmit: false,
       // Default element type to receive the default text (a, div, p, h).
-      defaultElement: '<p/>',
+      defaultElement: 'p',
       // Default text to display in checkbox.
       defaultText: '-',
       // Class to wrapper all the custom select elements.
@@ -49,14 +49,12 @@
         'class': settings.classContainer.replace('.', '')
       }).insertAfter($select);
 
-
-      var $container = $(element).next(settings.classContainer);
       // Build custom option to display selected value.
-      $(settings.defaultElement, {
+      var $container = $(element).next(settings.classContainer);
+      $('<' + settings.defaultElement + '/>', {
         'class': settings.classCurrent.replace('.', ''),
         'text': settings.defaultText
       }).appendTo($container);
-
 
       // Build area to append the list of values.
       $('<ul/>', {
@@ -64,8 +62,8 @@
         'role': 'menu'
       }).appendTo($container);
 
-      var $options = $container.find(settings.classOptions);
       // Build the list of settings and append at the created ul block.
+      var $options = $container.find(settings.classOptions);
       $select.find('option').each(function () {
         $('<li/>', {
           'data-option': $(this).val(),
@@ -77,7 +75,7 @@
       if (settings.autoFormSubmit === true) {
         $(element)
           .closest('form')
-          .find('input[type=submit]')
+          .find('[type=submit]')
           .hide();
       }
     };
