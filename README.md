@@ -1,4 +1,4 @@
-## Custom jQuery Select
+## Custom jQuery Select [![Version](https://img.shields.io/badge/Version-1.0.0-orange.svg)](https://github.com/williankeller/jquery-custom-select/blob/master/CONTRIBUTING.md) [![MIT License](https://img.shields.io/badge/License-MIT-blue.svg)](http://opensource.org/licenses/MIT)
 
 This plug-in allow you customize your form select select options easily and with a small library.
 
