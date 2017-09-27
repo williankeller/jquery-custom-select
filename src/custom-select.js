@@ -1,4 +1,5 @@
-(function ($) {
+(function ($, window, document) {
+  "use strict";
 
   /**
    * Define global function to set a custom select.
@@ -36,18 +37,17 @@
     /**
      * Build the custom select elements.
      *
-     * @param {Object} element
+     * @param {DOM} element
      * @returns {Boolean}
      */
     var buildCustomSelect = function (element) {
-      var $select = $(element);
       // Hide select options.
-      $select.hide();
+      $(element).hide();
 
       // Build the custom select container.
       $('<div/>', {
         'class': settings.classContainer.replace('.', '')
-      }).insertAfter($select);
+      }).insertAfter(element);
 
       // Build custom option to display selected value.
       var $container = $(element).next(settings.classContainer);
@@ -64,7 +64,7 @@
 
       // Build the list of settings and append at the created ul block.
       var $options = $container.find(settings.classOptions);
-      $select.find('option').each(function () {
+      $(element).find('option').each(function () {
         $('<li/>', {
           'data-option': $(this).val(),
           'text': $(this).text()
@@ -80,47 +80,54 @@
       }
     };
 
+    var toggleSelectOptions = function (element) {
+      // If is already open, action to close.
+      if (element.hasClass('expanded')) {
+        element
+          .removeClass('expanded')
+          .next()
+          .removeClass('opened')
+          .slideUp(100);
+      }
+      // Otherwise, add parameters to display options.
+      else {
+        element
+          .addClass('expanded')
+          .next()
+          .addClass('opened')
+          .slideDown(100);
+      }
+    };
+
     /**
      * Define click action to custom created element.
      *
+     * @param {DOM} element
      * @returns {Boolean}
      */
     var clickSelectValues = function (element) {
+      // DOM element variables.
       var $element = $(element),
         $container = $element.next(settings.classContainer),
         $select = $container.find(settings.classCurrent);
 
-      // Detect custom select action.
+      // Detect custom click select action.
       $select.on('click', function () {
         var $this = $(this);
 
-        // If is already open, action to close.
-        if ($this.hasClass('expanded')) {
-          $this
-            .removeClass('expanded')
-            .next()
-            .removeClass('opened')
-            .slideUp();
-        }
-        // Otherwise, add parameters to display options.
-        else {
-          $this
-            .addClass('expanded')
-            .next()
-            .addClass('opened')
-            .slideDown();
-        }
+        toggleSelectOptions($this);
       });
       return false;
     };
 
     /**
-     * Define click action to custom created list of elements.
+     * Define click action to custom created list of new elements.
      *
-     * @param {Object} element
+     * @param {DOM} element
      * @returns {Boolean}
      */
     var clickSelectOption = function (element) {
+      // DOM element variables.
       var $element = $(element),
         $container = $element.next(settings.classContainer),
         $options = $container.find(settings.classOptions);
@@ -134,13 +141,10 @@
           return ($(this).val().toString()) === ($this.data('option').toString());
         }).prop('selected', true);
 
+        // Find select option.
+        var $select = $this.parent().prev();
         // Hide select options.
-        $this
-          .parent()
-          .removeClass('opened')
-          .slideUp()
-          .prev()
-          .removeClass('expanded');
+        toggleSelectOptions($select);
 
         // Check if form should be submited when change select.
         if (settings.autoFormSubmit === false) {
@@ -166,14 +170,29 @@
      * @see buildCustomSelect
      * @see clickSelectValues
      * @see clickSelectOption
+     *
+     * @param {DOM} elements
+     * @returns {DOM}
      */
-    return this.each(function () {
-      // Build the custom select elements.
-      buildCustomSelect(this);
-      // Define click action to custom created element.
-      clickSelectValues(this);
-      // Define click action to custom created list of elements.
-      clickSelectOption(this);
-    });
+    var init = function (elements) {
+      // Tracks all elements passed in the function.
+      elements.each(function () {
+
+        // Build the custom select elements.
+        buildCustomSelect(this);
+
+        // Define click action to custom created element.
+        clickSelectValues(this);
+
+        // Define click action to custom created list of elements.
+        clickSelectOption(this);
+      });
+      return elements;
+    };
+
+    /**
+     * Return to render and build to each matched elements.
+     */
+    return init(this);
   };
-})(jQuery);
+})(jQuery, window, document);
