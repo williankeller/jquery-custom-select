@@ -40,14 +40,24 @@
         </select>
       </form>
 
-      <form class="margin" method="GET">
+      <form class="margin">
         <h4>Example Four:</h4>
-        <p>Submit form when select an option <em class="text-muted">(default false)</em>:
-          <br>An element as submit type exist, it will be hidden.</p>
-        <select class="select-four" name="select4">
+        <p>Animation speed <em class="text-muted">(default 100)</em>:</p>
+        <select class="select-three">
           <option value="select4-value1">Select four - Value 1</option>
           <option value="select4-value2">Select four - Value 2</option>
           <option value="select4-value3">Select four - Value 3</option>
+        </select>
+      </form>
+
+      <form class="margin" method="GET">
+        <h4>Example Five:</h4>
+        <p>Submit form when select an option <em class="text-muted">(default false)</em>:
+          <br>An element as submit type exist, it will be hidden.</p>
+        <select class="select-five" name="select4">
+          <option value="select5-value1">Select five - Value 1</option>
+          <option value="select5-value2">Select five - Value 2</option>
+          <option value="select5-value3">Select five - Value 3</option>
         </select>
         <button type="submit">Submit</button>
       </form>
@@ -73,8 +83,13 @@
         defaultText: 'Here is a H5 element select'
       });
 
-      // Submit form when select an option.
+      // Select animation speed.
       $('.select-four').customSelect({
+        animationSpeed: 800
+      });
+
+      // Submit form when select an option.
+      $('.select-five').customSelect({
         autoFormSubmit: true,
         defaultElement: 'div',
         defaultText: 'Select an option to submit form'

@@ -24,6 +24,8 @@
       defaultElement: 'p',
       // Default text to display in checkbox.
       defaultText: '-',
+      // Animation custom select speed.
+      animationSpeed: 100,
       // Class to wrapper all the custom select elements.
       classContainer: '.custom-select-container',
       // Class to define current selected option text.
@@ -80,6 +82,12 @@
       }
     };
 
+    /**
+     * Open or close custom select and options.
+     *
+     * @param {DOM} element
+     * @returns {Boolean}
+     */
     var toggleSelectOptions = function (element) {
       // If is already open, action to close.
       if (element.hasClass('expanded')) {
@@ -87,7 +95,7 @@
           .removeClass('expanded')
           .next()
           .removeClass('opened')
-          .slideUp(100);
+          .slideUp(settings.animationSpeed);
       }
       // Otherwise, add parameters to display options.
       else {
@@ -95,8 +103,9 @@
           .addClass('expanded')
           .next()
           .addClass('opened')
-          .slideDown(100);
+          .slideDown(settings.animationSpeed);
       }
+      return false;
     };
 
     /**
@@ -115,6 +124,7 @@
       $select.on('click', function () {
         var $this = $(this);
 
+        // Open or close custom select and options.
         toggleSelectOptions($this);
       });
       return false;
