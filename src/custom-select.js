@@ -109,19 +109,37 @@
     };
 
     /**
+     * Funtion to reach the required element.
+     *
+     * @param {DOM} element
+     * @param {string} find
+     * @returns {Object} List of parameters made.
+     */
+    var elementFinder = function (element, find) {
+      // Intance variables.
+      var $element = $(element),
+        $container = $element.next(settings.classContainer),
+        $finder = $container.find(find);
+
+      return {
+        element: $element,
+        container: $container,
+        data: $finder
+      };
+    };
+
+    /**
      * Define click action to custom created element.
      *
      * @param {DOM} element
      * @returns {Boolean}
      */
     var clickSelectValues = function (element) {
-      // DOM element variables.
-      var $element = $(element),
-        $container = $element.next(settings.classContainer),
-        $select = $container.find(settings.classCurrent);
+      // Find DOM element.
+      var finder = elementFinder(element, settings.classCurrent);
 
       // Detect custom click select action.
-      $select.on('click', function () {
+      finder.data.on('click', function () {
         var $this = $(this);
 
         // Open or close custom select and options.
@@ -137,17 +155,15 @@
      * @returns {Boolean}
      */
     var clickSelectOption = function (element) {
-      // DOM element variables.
-      var $element = $(element),
-        $container = $element.next(settings.classContainer),
-        $options = $container.find(settings.classOptions);
+      // Find DOM element.
+      var finder = elementFinder(element, settings.classOptions);
 
       // Detect click action.
-      $options.find('li').on('click', function () {
+      finder.data.find('li').on('click', function () {
         var $this = $(this);
 
         // Select current option under the old select box.
-        $element.find('option').filter(function () {
+        finder.element.find('option').filter(function () {
           return ($(this).val().toString()) === ($this.data('option').toString());
         }).prop('selected', true);
 
@@ -166,7 +182,7 @@
         }
         // If true, submit select form.
         else {
-          $element
+          finder.element
             .closest('form')
             .submit();
         }
