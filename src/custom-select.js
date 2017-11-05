@@ -20,6 +20,8 @@
     var defaults = {
       // Submit form when select option is selected.
       autoFormSubmit: false,
+      // Add search field when open the dropdown.
+      searchField: false,
       // Default element type to receive the default text (a, div, p, h).
       defaultElement: 'p',
       // Default text to display in checkbox.
@@ -189,6 +191,46 @@
       });
       return false;
     };
+
+    /**
+     * Function to search string in filter.
+     *
+     * @param {Object} filter
+     * @returns {Boolean}
+     */
+    searchListContent = function (filter) {
+      // Search input and start on keyup.
+      $(filter).find('input').on('keyup', function () {
+        // Instance query.
+        var currentQuery = $(this).val().toLowerCase();
+
+        if (currentQuery !== "") {
+          // Hidden all itens on start typing.
+          $(filter)
+            .find('li')
+            .not('.field-search')
+            .addClass('hidden');
+
+          // List items.
+          $(filter).find('li').each(function () {
+            // Instance current text.
+            var keyword = $(this).text().toLowerCase();
+
+            // Find by string.
+            if (keyword.indexOf(currentQuery) >= 0) {
+              $(this).removeClass('hidden');
+            }
+            ;
+          });
+        } else {
+          // Remove class hidden by default.
+          $(filter).find('li').removeClass('hidden');
+        }
+        ;
+      });
+      return false;
+    }
+    ;
 
     /**
      * Return to render and build to each matched elements.
