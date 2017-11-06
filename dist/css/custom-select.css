@@ -34,3 +34,14 @@
   background-color: #eee;
   cursor: pointer;
 }
+.custom-select-container .custom-select-options li.custom-select-search {
+  padding: 0;
+}
+.custom-select-container .custom-select-options li.custom-select-search input {
+  border: 0;
+  padding: 10px 15px;
+  width: 100%;
+}
+.custom-select-container .custom-select-options li.custom-select-search input:focus, .custom-select-container .custom-select-options li.custom-select-search input:active, .custom-select-container .custom-select-options li.custom-select-search input:hover {
+  outline: none;
+}

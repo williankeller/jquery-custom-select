@@ -31,12 +31,28 @@
       color: #777;
       margin-bottom: 2px;
       padding: 15px;
+
       &:last-child {
         margin-bottom: 0;
       }
+
       &:hover {
         background-color: #eee;
         cursor: pointer;
+      }
+
+      &.custom-select-search {
+        padding: 0;
+        input {
+          border: 0;
+          padding: 10px 15px;
+          width: 100%;
+          &:focus,
+          &:active,
+          &:hover {
+            outline: none;
+          }
+        }
       }
     }
   }
