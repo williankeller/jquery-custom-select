@@ -57,14 +57,25 @@
       <div class="row">
         <form class="col-md-6 margin" method="GET">
           <h4>Example Five:</h4>
-          <p>Submit form when select an option <em class="text-muted">(default false)</em>:
-            <br>An element as submit type exist, it will be hidden.</p>
+          <p>Submit form when select an option and remove the submit button <em class="text-muted">(default false)</em>:</p>
           <select class="select-five" name="select4">
             <option value="select5-value1">Select five - Value 1</option>
             <option value="select5-value2">Select five - Value 2</option>
             <option value="select5-value3">Select five - Value 3</option>
           </select>
           <button type="submit">Submit</button>
+        </form>
+
+        <form class="col-md-6 margin">
+          <h4>Example Six:</h4>
+          <p>Search an option <em class="text-muted">using search attribute</em>:</p>
+          <select class="select-six">
+            <option value="select6-value1">Select six - A value to search</option>
+            <option value="select6-value2">Select six - Different text here</option>
+            <option value="select6-value3">Select six - What about an option</option>
+            <option value="select6-value4">Select six - Try to search some text</option>
+            <option value="select6-value5">Select six - Other content here</option>
+          </select>
         </form>
       </div>
     </div>
@@ -73,7 +84,7 @@
     <script src="https://code.jquery.com/jquery-3.2.1.min.js" crossorigin="anonymous"></script>
 
     <!-- Custom select script file -->
-    <script src="./dist/js/custom-select.min.js"></script>
+    <script src="./src/custom-select.js"></script>
     <script>
       // Default usage.
       $('.select-one').customSelect();
@@ -99,6 +110,13 @@
         autoFormSubmit: true,
         defaultElement: 'div',
         defaultText: 'Select an option to submit form'
+      });
+
+      // Adding a custom search to your select.
+      $('.select-six').customSelect({
+        searchField: true,
+        defaultElement: 'div',
+        defaultText: 'Click here to search an option'
       });
     </script>
   </body>

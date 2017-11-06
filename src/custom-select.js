@@ -1,4 +1,4 @@
-(function ($, window, document) {
+(function ($) {
   "use strict";
 
   /**
@@ -20,14 +20,22 @@
     var defaults = {
       // Submit form when select option is selected.
       autoFormSubmit: false,
+
       // Add search field when open the dropdown.
       searchField: false,
+      // Change the placeholder text of the search field.
+      searchText: 'Search your option here...',
+      // Class to wrapper the search input field.
+      searchClass: '.custom-select-search',
+
       // Default element type to receive the default text (a, div, p, h).
-      defaultElement: 'p',
+      defaultElement: 'div',
       // Default text to display in checkbox.
       defaultText: '-',
+
       // Animation custom select speed.
       animationSpeed: 100,
+
       // Class to wrapper all the custom select elements.
       classContainer: '.custom-select-container',
       // Class to define current selected option text.
@@ -37,6 +45,86 @@
     };
     // Merging settings.
     var settings = $.extend({}, defaults, options);
+
+    /**
+     * Function to search string in list of options.
+     *
+     * @param {Object} filter
+     * @returns {Boolean}
+     */
+    var searchListContent = function () {
+      var filter = $(settings.searchClass);
+      var option = filter.parent();
+
+      // Search input and start on keyup.
+      filter.find('input').on('keyup', function () {
+        // Instance query.
+        var currentQuery = $(this).val().toLowerCase();
+
+        if (currentQuery !== "") {
+          // Hidden all itens on start typing.
+          option.find('li').not(settings.searchClass).addClass('hidden');
+
+          // List items.
+          option.find('li').each(function () {
+            // Instance current text.
+            var keyword = $(this).text().toLowerCase();
+
+            // Find by string.
+            if (keyword.indexOf(currentQuery) >= 0) {
+              $(this).removeClass('hidden');
+            }
+          });
+        }
+        // Remove class hidden by default.
+        else {
+          option.find('li').removeClass('hidden');
+        }
+      });
+    };
+
+    /**
+     * Build custom select filter field.
+     *
+     * @param {Object} element
+     * @returns {Boolean}
+     */
+    var buildCustomSearch = function (element) {
+      // Display search field if is enabled.
+      if (settings.searchField === true) {
+        // Create search option list.
+        $('<li/>', {
+          'data-option': '__search__',
+          'class': settings.searchClass.replace('.', '')
+        }).appendTo(element);
+        // Create input and append to search filter.
+        $('<input>', {
+          'typen': 'text',
+          'placeholder': settings.searchText
+        }).appendTo(settings.searchClass);
+
+        // Function to search string in list of options.
+        searchListContent();
+      }
+      return false;
+    };
+
+    /**
+     * Hide form submit button if enabled.
+     *
+     * @param {Object} element
+     * @returns {Boolean}
+     */
+    var formToSubmit = function (element) {
+      // Hide button if auto submit is true.
+      if (settings.autoFormSubmit === true) {
+        $(element)
+          .closest('form')
+          .find('[type=submit]')
+          .hide();
+      }
+      return false;
+    };
 
     /**
      * Build the custom select elements.
@@ -53,8 +141,10 @@
         'class': settings.classContainer.replace('.', '')
       }).insertAfter(element);
 
-      // Build custom option to display selected value.
+      // Instance container created before.
       var $container = $(element).next(settings.classContainer);
+
+      // Build custom option to display selected value.
       $('<' + settings.defaultElement + '/>', {
         'class': settings.classCurrent.replace('.', ''),
         'text': settings.defaultText
@@ -65,9 +155,12 @@
         'class': settings.classOptions.replace('.', ''),
         'role': 'menu'
       }).appendTo($container);
+      var $options = $container.find(settings.classOptions);
+
+      // Build custom select filter field.
+      buildCustomSearch($options);
 
       // Build the list of settings and append at the created ul block.
-      var $options = $container.find(settings.classOptions);
       $(element).find('option').each(function () {
         $('<li/>', {
           'data-option': $(this).val(),
@@ -75,13 +168,8 @@
         }).appendTo($options);
       });
 
-      // Hide button if auto submit is true.
-      if (settings.autoFormSubmit === true) {
-        $(element)
-          .closest('form')
-          .find('[type=submit]')
-          .hide();
-      }
+      // Hide form submit button if enabled.
+      formToSubmit(element);
     };
 
     /**
@@ -131,7 +219,7 @@
     };
 
     /**
-     * Define click action to custom created element.
+     * Click action to the custom created select element.
      *
      * @param {DOM} element
      * @returns {Boolean}
@@ -151,7 +239,7 @@
     };
 
     /**
-     * Define click action to custom created list of new elements.
+     * Click action to custom created list options of new elements.
      *
      * @param {DOM} element
      * @returns {Boolean}
@@ -162,15 +250,21 @@
 
       // Detect click action.
       finder.data.find('li').on('click', function () {
-        var $this = $(this);
+        var $this = $(this),
+          $select = $this.parent().prev(),
+          options = $this.data('option').toString();
+
+        // Check if is an option with the search filter.
+        if (options === '__search__') {
+          // Kill function to not set the click action.
+          return false;
+        }
 
         // Select current option under the old select box.
         finder.element.find('option').filter(function () {
-          return ($(this).val().toString()) === ($this.data('option').toString());
+          return ($(this).val().toString()) === options;
         }).prop('selected', true);
 
-        // Find select option.
-        var $select = $this.parent().prev();
         // Hide select options.
         toggleSelectOptions($select);
 
@@ -191,46 +285,6 @@
       });
       return false;
     };
-
-    /**
-     * Function to search string in filter.
-     *
-     * @param {Object} filter
-     * @returns {Boolean}
-     */
-    searchListContent = function (filter) {
-      // Search input and start on keyup.
-      $(filter).find('input').on('keyup', function () {
-        // Instance query.
-        var currentQuery = $(this).val().toLowerCase();
-
-        if (currentQuery !== "") {
-          // Hidden all itens on start typing.
-          $(filter)
-            .find('li')
-            .not('.field-search')
-            .addClass('hidden');
-
-          // List items.
-          $(filter).find('li').each(function () {
-            // Instance current text.
-            var keyword = $(this).text().toLowerCase();
-
-            // Find by string.
-            if (keyword.indexOf(currentQuery) >= 0) {
-              $(this).removeClass('hidden');
-            }
-            ;
-          });
-        } else {
-          // Remove class hidden by default.
-          $(filter).find('li').removeClass('hidden');
-        }
-        ;
-      });
-      return false;
-    }
-    ;
 
     /**
      * Return to render and build to each matched elements.
@@ -263,4 +317,4 @@
      */
     return init(this);
   };
-})(jQuery, window, document);
+})(jQuery);
