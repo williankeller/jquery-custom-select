@@ -31,11 +31,28 @@ $('.select-three').customSelect({
 ```
 
 #### Example Four:
+Allow you to define an animation speed, that means you can set values to your dropdown open fast or slowly *(default 100 - here using 600)*.
+```javascript
+$('.select-four').customSelect({
+  animationSpeed: 600
+});
+```
+
+#### Example Five
 Submit form when select an option *(default false)*.
 If exist an element with the submit type, it will be hidden automatically and the form will be submitted automatically when option is changed.
 ```javascript
-$('.select-four').customSelect({
-  autoFormSubmit: true,
+$('.select-five').customSelect({
+  autoFormSubmit: true
+});
+```
+
+#### Example Six
+This option allow your select options to display a search filter, this way you might find your option just typing the initial word *(default false)*.
+```javascript
+$('.select-six').customSelect({
+  searchField: true,
+  searchText: 'Search your option here...', // optional
 });
 ```
 
