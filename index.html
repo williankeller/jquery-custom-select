@@ -1,94 +1,119 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Custom jQuery Select - Willian Keller</title>
+    <title>jQuery Custom Select - Willian Keller</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="author" content="Willian Keller, will_levinski@hotmail.com">
-    <link rel="stylesheet" type="text/css" href="./dist/css/custom-select.css">
+    <link rel="stylesheet" type="text/css" href="dist/css/custom-select.css">
 
     <!-- Used just to create example file. (Not necessary at all) -->
-    <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   </head>
   <body>
     <div class="container custom-example">
-      <form class="margin">
-        <h4>Example One:</h4>
-        <p>Simple use, just define the current select class:</p>
-        <pre><code>$('.select-one').customSelect();</code></pre>
-        <select class="select-one">
-          <option value="select1-value1">Select one - Value 1</option>
-          <option value="select1-value2">Select one - Value 2</option>
-          <option value="select1-value3">Select one - Value 3</option>
-        </select>
-      </form>
+      <div class="margin text-center">
+        <h2 class="">jQuery Custom Select</h2>
+        <h4>This plug-in allow you customize your form select select options easily and with a small library.</h4>
+        <div class="margin clearfix">
+          <div class="pull-left">
+            <a href="https://github.com/williankeller/jquery-custom-select">See full code here</a>
+          </div>
+          <div class="pull-right">
+            <a href="https://github.com/williankeller/jquery-custom-select#fork-destination-box">Contribute! Just fork!</a>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <form class="margin col-md-6">
+          <h4>Example One:</h4>
+          <p>Simple use, just define the current select class:</p>
+          <select class="select-one">
+            <option value="select1-value1">Select one - Value 1</option>
+            <option value="select1-value2">Select one - Value 2</option>
+            <option value="select1-value3">Select one - Value 3</option>
+          </select>
+          <pre><code>$('.select-one').customSelect();</code></pre>
+        </form>
 
-      <form class="margin">
-        <h4>Example Two:</h4>
-        <p>Adding a custom title to your select <em class="text-muted">(default - )</em>:</p>
-        <pre><code>$('.select-two').customSelect({
+        <form class="margin col-md-6">
+          <h4>Example Two:</h4>
+          <p>Adding a custom title to your select <em class="text-muted">(default - )</em>:</p>
+          <select class="select-two">
+            <option value="select2-value1">Select two - Value 1</option>
+            <option value="select2-value2">Select two - Value 2</option>
+            <option value="select2-value3">Select two - Value 3</option>
+          </select>
+          <pre><code>$('.select-two').customSelect({
   defaultText: 'Select your option here'
 });</code></pre>
-        <select class="select-two">
-          <option value="select2-value1">Select two - Value 1</option>
-          <option value="select2-value2">Select two - Value 2</option>
-          <option value="select2-value3">Select two - Value 3</option>
-        </select>
-      </form>
+        </form>
+      </div>
 
-      <form class="margin">
-        <h4>Example Three:</h4>
-        <p>Changing click element <em class="text-muted">(default p)</em>:</p>
-        <pre><code>$('.select-three').customSelect({
+      <div class="row">
+        <form class="margin col-md-6">
+          <h4>Example Three:</h4>
+          <p>Changing click element <em class="text-muted">(default p)</em>:</p>
+          <select class="select-three">
+            <option value="select3-value1">Select three - Value 1</option>
+            <option value="select3-value2">Select three - Value 2</option>
+            <option value="select3-value3">Select three - Value 3</option>
+          </select>
+          <pre><code>$('.select-three').customSelect({
   defaultElement: 'h5',
   defaultText: 'Here is a H5 element select'
 });</code></pre>
-        <select class="select-three">
-          <option value="select3-value1">Select three - Value 1</option>
-          <option value="select3-value2">Select three - Value 2</option>
-          <option value="select3-value3">Select three - Value 3</option>
-        </select>
-      </form>
+        </form>
 
-      <form class="margin">
-        <h4>Example Four:</h4>
-        <p>Animation speed <em class="text-muted">(default 100 - here using 600)</em>:</p>
-        <pre><code>$('.select-four').customSelect({
+        <form class="margin col-md-6">
+          <h4>Example Four:</h4>
+          <p>Animation speed <em class="text-muted">(default 100 - here using 600)</em>:</p>
+          <select class="select-four">
+            <option value="select4-value1">Select four - Value 1</option>
+            <option value="select4-value2">Select four - Value 2</option>
+            <option value="select4-value3">Select four - Value 3</option>
+          </select>
+          <pre><code>$('.select-four').customSelect({
   animationSpeed: 600
 });</code></pre>
-        <select class="select-four">
-          <option value="select4-value1">Select four - Value 1</option>
-          <option value="select4-value2">Select four - Value 2</option>
-          <option value="select4-value3">Select four - Value 3</option>
-        </select>
-      </form>
-
-      <form class="margin" method="GET">
-        <h4>Example Five:</h4>
-        <p>Submit form when select an option <em class="text-muted">(default false)</em>:
-          <br>An element as submit type exist, it will be hidden.</p>
-        <pre><code>$('.select-five').customSelect({
+        </form>
+      </div>
+      <div class="row">
+        <form class="margin col-md-6" method="GET">
+          <h4>Example Five:</h4>
+          <p>Submit form when select an option <em class="text-muted">(default false)</em>:
+            <br>An element as submit type exist, it will be hidden.</p>
+          <select class="select-five" name="select5">
+            <option value="select5-value1">Select five - Value 1</option>
+            <option value="select5-value2">Select five - Value 2</option>
+            <option value="select5-value3">Select five - Value 3</option>
+          </select>
+          <button type="submit">Submit</button>
+          <pre><code>$('.select-five').customSelect({
   autoFormSubmit: true,
-  defaultElement: 'div',
   defaultText: 'Select an option to submit form'
 });</code></pre>
-        <select class="select-five" name="select5">
-          <option value="select5-value1">Select five - Value 1</option>
-          <option value="select5-value2">Select five - Value 2</option>
-          <option value="select5-value3">Select five - Value 3</option>
-        </select>
-        <button type="submit">Submit</button>
-      </form>
-    </div>
+        </form>
 
-    <div class="container custom-example">
-      <div class="margin clearfix">
-        <div class="pull-left">
-          <a href="https://github.com/williankeller/jquery-custom-select">See code</a>
-        </div>
-        <div class="pull-right">
-          <a href="https://github.com/williankeller/jquery-custom-select#fork-destination-box">Fork</a>
-        </div>
+        <form class="margin col-md-6">
+          <h4>Example Six:</h4>
+          <p>This option allow your select options to display a search filter, this way you might find your option just typing the initial word. <em class="text-muted">(default false)</em>:</p>
+          <select class="select-six">
+            <option value="select6-value1">Select six - A value to search</option>
+            <option value="select6-value2">Select six - Different text here</option>
+            <option value="select6-value3">Select six - What about an option</option>
+            <option value="select6-value4">Select six - Try to search some text</option>
+            <option value="select6-value5">Select six - Other content here</option>
+          </select>
+          <pre><code>$('.select-six').customSelect({
+  searchField: true,
+  searchText: 'Search your option here...' // optional
+});</code></pre>
+        </form>
+      </div>
+
+      <div class="margin text-center">
+        <a href="https://github.com/williankeller" class="text-muted">Willian Keller</a>
       </div>
     </div>
 
@@ -96,7 +121,7 @@
     <script src="https://code.jquery.com/jquery-3.2.1.min.js" crossorigin="anonymous"></script>
 
     <!-- Custom select script file -->
-    <script src="./dist/js/custom-select.min.js"></script>
+    <script src="dist/js/custom-select.min.js"></script>
     <script>
       // Default usage.
       $('.select-one').customSelect();
@@ -120,8 +145,13 @@
       // Submit form when select an option.
       $('.select-five').customSelect({
         autoFormSubmit: true,
-        defaultElement: 'div',
         defaultText: 'Select an option to submit form'
+      });
+
+      // Allow search input field.
+      $('.select-six').customSelect({
+        searchField: true,
+        searchText: 'Search your option here...'
       });
     </script>
   </body>
