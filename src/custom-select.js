@@ -127,6 +127,61 @@
     };
 
     /**
+     * Set select option text to custom label.
+     *
+     * @param {DOM} element
+     * @param {Object} option
+     */
+    var setSelectText = function (element, option) {
+      // Find DOM element.
+      var finder = elementFinder(element, settings.classCurrent);
+      // Define value to current text.
+      finder.data.text($(option).text());
+    };
+
+    /**
+     * Build list of options structure.
+     *
+     * @param {Object} container
+     * @returns {undefined}
+     */
+    var buildCustomList = function (container) {
+      // Build custom option to display selected value.
+      $('<' + settings.defaultElement + '/>', {
+        'class': settings.classCurrent.replace('.', ''),
+        'text': settings.defaultText
+      }).appendTo(container);
+
+      // Build area to append the list of values.
+      $('<ul/>', {
+        'class': settings.classOptions.replace('.', ''),
+        'role': 'menu'
+      }).appendTo(container);
+    };
+
+    /**
+     * Build cutom options and append to select.
+     *
+     * @param {DOM} element
+     * @param {Object} option
+     */
+    var buildCustomOptions = function (element, options) {
+      // Build the list of settings and append at the created ul block.
+      $(element).find('option').each(function () {
+        $('<li/>', {
+          'data-option': $(this).val(),
+          'text': $(this).text()
+        }).appendTo(options);
+
+        // If currrent option is selected.
+        if ($(this).attr('selected')) {
+          // Set select option text to custom label.
+          setSelectText(element, this);
+        }
+      });
+    };
+
+    /**
      * Build the custom select elements.
      *
      * @param {DOM} element
@@ -144,29 +199,16 @@
       // Instance container created before.
       var $container = $(element).next(settings.classContainer);
 
-      // Build custom option to display selected value.
-      $('<' + settings.defaultElement + '/>', {
-        'class': settings.classCurrent.replace('.', ''),
-        'text': settings.defaultText
-      }).appendTo($container);
+      // Build list of options structure.
+      buildCustomList($container);
 
-      // Build area to append the list of values.
-      $('<ul/>', {
-        'class': settings.classOptions.replace('.', ''),
-        'role': 'menu'
-      }).appendTo($container);
       var $options = $container.find(settings.classOptions);
 
       // Build custom select filter field.
       buildCustomSearch($options);
 
-      // Build the list of settings and append at the created ul block.
-      $(element).find('option').each(function () {
-        $('<li/>', {
-          'data-option': $(this).val(),
-          'text': $(this).text()
-        }).appendTo($options);
-      });
+      // Build cutom options and append to select.
+      buildCustomOptions(element, $options);
 
       // Hide form submit button if enabled.
       formToSubmit(element);
@@ -250,19 +292,18 @@
 
       // Detect click action.
       finder.data.find('li').on('click', function () {
-        var $this = $(this),
-          $select = $this.parent().prev(),
-          options = $this.data('option').toString();
+        var $select = $(this).parent().prev(),
+          option = $(this).data('option').toString();
 
         // Check if is an option with the search filter.
-        if (options === '__search__') {
+        if (option === '__search__') {
           // Kill function to not set the click action.
           return false;
         }
 
-        // Select current option under the old select box.
+        // Select current option under the old input select box.
         finder.element.find('option').filter(function () {
-          return ($(this).val().toString()) === options;
+          return ($(this).val().toString()) === option;
         }).prop('selected', true);
 
         // Hide select options.
@@ -271,10 +312,7 @@
         // Check if form should be submited when change select.
         if (settings.autoFormSubmit === false) {
           // If false, just set current selection.
-          $this
-            .parent()
-            .prev()
-            .text($this.text());
+          setSelectText(element, this);
         }
         // If true, submit select form.
         else {
